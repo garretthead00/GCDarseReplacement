@@ -1,0 +1,11 @@
+   th.dataSamplesTable , td.dataSamplesTable {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+    .dataSamplesTable tr:nth-child(odd) {
+      background-color: #f1f1f1;
+    }
+    .dataSamplesTable tr:nth-child(even) {
+      background-color: #ffffff;
+    }
