@@ -18,46 +18,12 @@
         console.log("---MAIN tInvValue: " + tInvValue);
       };
 
-    // Calculating Grubb's values for the set of sampled data  
-      console.log("--- Calculating sets ---");
+
+      //MARK: Iterative Grubbs Calculation
       var samples = SampledData.samples;
-      
-      // Holds a set of values for Grubb's score for each set of sampled data, used to determine outliers.
-      var grubbsSetCalculations = [];
-
-      // samples.forEach(function(set) {
-      //   var size = GrubbsCalculator.calculateSize(set);
-      //   var average = GrubbsCalculator.calculateAverage(set);
-      //   var standardDeviation = GrubbsCalculator.calculateStandardDeviation(set, average);
-      //   var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05);
-
-      //   console.log("--------");
-      //   console.log("size: " + size);
-      //   console.log("mean: " + average);
-      //   console.log("standard dev: " + standardDeviation);
-      //   console.log("t_Test: " + t_TestSignificance);
-
-      //   // Find the closest value equal to the 1 - tTestSignificance
-      //   var counts = T_InverseTable.probabilities;
-      //   var goal = 1 - t_TestSignificance;
-      //   var closest = counts.reduce(function(prev, curr) {
-      //     return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-      //   });
-      //   console.log("closest prob from tTestVal: " + closest);
-      //   var grubbsValue = GrubbsCalculator.calculateGrubbsValue(size,closest);
-      //   console.log("Grubb's: " + grubbsValue);
-      //   grubbsSetCalculations.push(grubbsValue);
-      // });
-
-      // console.log("grubbs values: " + grubbsSetCalculations);
-
-
-
-      // Iterative Grubbs Calculation
-
       var significanceLevel = 0.05;
       var outliers = [];
-
+      var grubbsSetCalculations = [];
       do {
 
         outliers = []; // empty the outliers array
