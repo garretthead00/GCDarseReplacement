@@ -126,7 +126,6 @@ function getFullAttributes(id) {
 
 var tsArray = [];
 var valueArray = [];
-
 var returnedValArray = [];
 
 console.log("starting service...");
