@@ -34,13 +34,7 @@
           var size = GrubbsCalculator.calculateSize(set);
           var average = GrubbsCalculator.calculateAverage(set);
           var standardDeviation = GrubbsCalculator.calculateStandardDeviation(set, average);
-          var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05);
-
-          console.log("--------");
-          console.log("size: " + size);
-          console.log("mean: " + average);
-          console.log("standard dev: " + standardDeviation);
-          console.log("t_Test: " + t_TestSignificance);
+          var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05)
 
           // Find the closest value equal to the 1 - tTestSignificance
           var counts = T_InverseTable.probabilities;
@@ -48,18 +42,24 @@
           var closest = counts.reduce(function(prev, curr) {
             return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
           });
-          console.log("closest prob from tTestVal: " + closest);
           var grubbsValue = GrubbsCalculator.calculateGrubbsValue(size,closest);
-          console.log("Grubb's: " + grubbsValue);
           grubbsSetCalculations.push(grubbsValue);
+
+          // console.log("--------");
+          // console.log("size: " + size);
+          // console.log("mean: " + average);
+          // console.log("standard dev: " + standardDeviation);
+          // console.log("t_Test: " + t_TestSignificance);
+          // console.log("closest prob from tTestVal: " + closest);
+          // console.log("Grubb's: " + grubbsValue);
         });
 
         // identify outliers
         for (i = 0; i < samples.length; i++) {
           samples[i].forEach(function(sample){
-            if (sample > grubbsSetCalculations[i] + significanceLevel || sample < grubbsSetCalculations - significanceLevel){
+            if (sample.Value > grubbsSetCalculations[i] + significanceLevel || sample.Value < grubbsSetCalculations - significanceLevel){
               // only push is the current sample.timestamp DNE in outliers
-              outliers.push(sample);
+              outliers.push(sample.Timestamp);
             }
           });
         }
@@ -82,7 +82,7 @@
           samples = tempSamples;
         }
   
-
+        console.log("iterattive outliers: " + outliers);
 
 
       } while (outliers.length > 0);
