@@ -12,22 +12,22 @@ var GrubbsCalculator = {
       return sum / data.length;
     },
 
-    calculateStandardDeviation : function(values, average){
-      var squareDiffs = values.map(function(value){
-        var diff = value.Value - average;
+    calculateStandardDeviation : function(samples, average){
+      var squareDiffs = samples.map(function(sample){
+        var diff = sample.Value - average;
         var sqrDiff = diff * diff;
         return sqrDiff;
       });
       // console.log("value.lenght: " + values.length);
-      var avgSquareDiff = (squareDiffs / values.length);
+      var avgSquareDiff = (squareDiffs / samples.length);
 
       var sum = squareDiffs.reduce(function(sum, value){
         return sum + value;
       }, 0);
-      var avgSquareDiff = (sum / values.length);
+      var avgSquareDiff = (sum / samples.length);
 
 
-      // console.log("avgSqrDiff: " + avgSquareDiff);
+      //console.log("avgSqrDiff: " + avgSquareDiff);
       var stdDev = Math.sqrt(avgSquareDiff);
       return stdDev;
     },

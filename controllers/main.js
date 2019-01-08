@@ -2,6 +2,7 @@
     angular.module('GCDarseReplacementApp', ['ngMaterial', 'ngMessages'])
     
     .controller('mainCtrl', function($scope){
+
       this.startDate = new Date();
       this.endDate = new Date();
       this.jetty = "";
@@ -23,7 +24,8 @@
       var samples = SampledData.samples;
       var significanceLevel = 0.05;
       var outliers = [];
-      var grubbsSetCalculations = [];
+      //var grubbsSetCalculations = [];
+      var i = 0;
       do {
 
         outliers = []; // empty the outliers array
@@ -31,6 +33,7 @@
         
         // get the grubbs values for each set
         samples.forEach(function(set) {
+
           var size = GrubbsCalculator.calculateSize(set);
           var average = GrubbsCalculator.calculateAverage(set);
           var standardDeviation = GrubbsCalculator.calculateStandardDeviation(set, average);
@@ -45,26 +48,42 @@
           var grubbsValue = GrubbsCalculator.calculateGrubbsValue(size,closest);
           grubbsSetCalculations.push(grubbsValue);
 
-          // console.log("--------");
-          // console.log("size: " + size);
-          // console.log("mean: " + average);
-          // console.log("standard dev: " + standardDeviation);
-          // console.log("t_Test: " + t_TestSignificance);
-          // console.log("closest prob from tTestVal: " + closest);
-          // console.log("Grubb's: " + grubbsValue);
+          console.log("--------");
+          console.log("i: " + i++);
+          console.log("size: " + size);
+          console.log("mean: " + average);
+          console.log("standard dev: " + standardDeviation);
+          console.log("t_Test: " + t_TestSignificance);
+          console.log("closest prob from tTestVal: " + closest);
+          console.log("Grubb's: " + grubbsValue);
         });
 
+        console.log("\n\n_____Grubbs Values____");
+        console.log("grubbsValues: " + grubbsSetCalculations);
         // identify outliers
-        for (i = 0; i < samples.length; i++) {
-          samples[i].forEach(function(sample){
-            if (sample.Value > grubbsSetCalculations[i] + significanceLevel || sample.Value < grubbsSetCalculations - significanceLevel){
+        var x = 0;
+        while (x < samples.length) {
+          //console.log("samples[x] length: " + samples[x].length);
+          y = 0;
+          samples[x].forEach(function(sample){
+            //console.log("sample.Value: " + sample.Value);
+            //console.log("grubbsSetCalculations[x]: " + grubbsSetCalculations[x] + " for set (x): " + x);
+           //console.log("sample index (y): " + y++);
+            if (sample.Value > grubbsSetCalculations[x] + significanceLevel || sample.Value < grubbsSetCalculations[x] - significanceLevel){
               // only push is the current sample.timestamp DNE in outliers
-              outliers.push(sample.Timestamp);
+              //outliers.push(sample.Timestamp);
+              if(outliers.indexOf(sample.Timestamp) === -1) {
+                outliers.push(sample.Timestamp);
+                //console.log(outliers);
+              }
             }
           });
+          x++;
         };
 
-       // console.log("outliers: " + outliers);
+
+        console.log("\n\n______REMOVE OUTLIERS______")
+        console.log("outliers: " + outliers);
         var tempSamples = [[]];
         var tempSet = [];
         // filter outliers from samples
@@ -74,7 +93,7 @@
           samples.forEach(function(set){
               tempSet = [];
               set.forEach(function(sample){
-                if (!outliers.includes(sample)){
+                if (!outliers.includes(sample.Timestamp)){
                   tempSet.push(sample);
                 }
             });
@@ -83,7 +102,7 @@
           samples = tempSamples;
         }
   
-        console.log("iterattive outliers: " + outliers);
+        //console.log("iterattive outliers: " + outliers);
 
 
       } while (outliers.length > 0);
@@ -91,8 +110,17 @@
       console.log("----- RESULTS -----");
       console.log("outliers: " + outliers);
       samples.forEach(function(set){
-        console.log("sample.length: " + samples.length);
-        console.log("samples: " + samples);
+        resultAverage = GrubbsCalculator.calculateAverage(set);
+        resultSize = set.length;
+
+        console.log("set.length: " + set.length);
+        console.log("set: " + set);
+        console.log("result size: " + resultSize);
+        console.log("result mean: " + resultAverage);
+
+        // set.forEach(function(sample){
+        //   console.log("sample.Value: " + sample.Value);
+        // });
       });
 
 
