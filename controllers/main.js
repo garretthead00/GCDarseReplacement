@@ -34,7 +34,7 @@
           var size = GrubbsCalculator.calculateSize(set);
           var average = GrubbsCalculator.calculateAverage(set);
           var standardDeviation = GrubbsCalculator.calculateStandardDeviation(set, average);
-          var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05)
+          var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05);
 
           // Find the closest value equal to the 1 - tTestSignificance
           var counts = T_InverseTable.probabilities;
@@ -62,8 +62,9 @@
               outliers.push(sample.Timestamp);
             }
           });
-        }
+        };
 
+       // console.log("outliers: " + outliers);
         var tempSamples = [[]];
         var tempSet = [];
         // filter outliers from samples

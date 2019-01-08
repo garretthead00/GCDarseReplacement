@@ -5,19 +5,20 @@ var GrubbsCalculator = {
     },
 
     calculateAverage : function(data){
-      var sum = data.reduce(function(sum, value){
-        return sum + value;
-      }, 0);
+      // console.log("Grubbs Calc timestamp: " + data[0].Timestamp);
+      // console.log("Grubbs Calc Value: " + data[0].Value);
+      var sum = data.reduce(function (acc, obj) { return acc + obj.Value; }, 0);
+      //console.log("sum: " + sum);
       return sum / data.length;
     },
 
     calculateStandardDeviation : function(values, average){
       var squareDiffs = values.map(function(value){
-        var diff = value - average;
+        var diff = value.Value - average;
         var sqrDiff = diff * diff;
         return sqrDiff;
       });
-      //console.log("value.lenght: " + values.length);
+      // console.log("value.lenght: " + values.length);
       var avgSquareDiff = (squareDiffs / values.length);
 
       var sum = squareDiffs.reduce(function(sum, value){
@@ -26,7 +27,7 @@ var GrubbsCalculator = {
       var avgSquareDiff = (sum / values.length);
 
 
-      //console.log("avgSqrDiff: " + avgSquareDiff);
+      // console.log("avgSqrDiff: " + avgSquareDiff);
       var stdDev = Math.sqrt(avgSquareDiff);
       return stdDev;
     },
