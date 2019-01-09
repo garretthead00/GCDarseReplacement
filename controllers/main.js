@@ -24,7 +24,7 @@
       var samples = SampledData.samples;
       var significanceLevel = 0.05;
       var outliers = [];
-      //var grubbsSetCalculations = [];
+      var grubbsSetCalculations = [];
       var i = 0;
       do {
 
@@ -112,15 +112,16 @@
       samples.forEach(function(set){
         resultAverage = GrubbsCalculator.calculateAverage(set);
         resultSize = set.length;
+        avg_rounded = GrubbsCalculator.calculateAverage_Rounded(resultAverage);
+        avg_normalized = GrubbsCalculator.calculateAverage_Normalized(resultAverage);
 
         console.log("set.length: " + set.length);
         console.log("set: " + set);
         console.log("result size: " + resultSize);
         console.log("result mean: " + resultAverage);
+        console.log("average (normalized): " + avg_normalized);
+        console.log("average (rounded): " + avg_rounded);
 
-        // set.forEach(function(sample){
-        //   console.log("sample.Value: " + sample.Value);
-        // });
       });
 
 

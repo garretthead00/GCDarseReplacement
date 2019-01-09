@@ -12,6 +12,17 @@ var GrubbsCalculator = {
       return sum / data.length;
     },
 
+    calculateAverage_Normalized : function(average) {
+      avg_scnt = average.toExponential();
+      console.log("Average (normalized): " + avg_scnt);
+      return avg_scnt;
+    },
+    calculateAverage_Rounded : function(average) {
+      avg_rounded = average
+      console.log("Average (rounded): " + avg_rounded);
+      return avg_rounded;
+    },
+
     calculateStandardDeviation : function(samples, average){
       var squareDiffs = samples.map(function(sample){
         var diff = sample.Value - average;
