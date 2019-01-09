@@ -14,12 +14,10 @@ var GrubbsCalculator = {
 
     calculateAverage_Normalized : function(average) {
       avg_scnt = average.toExponential();
-      console.log("Average (normalized): " + avg_scnt);
       return avg_scnt;
     },
     calculateAverage_Rounded : function(average) {
-      avg_rounded = average
-      console.log("Average (rounded): " + avg_rounded);
+      avg_rounded = average.toFixed(4);
       return avg_rounded;
     },
 
