@@ -75,12 +75,24 @@
     <p>Selected Jetty: {{ ctrl.jetty }}</p>
     <hr/>
 
-    <p>Grubb's Test</p>
+    <!-- <p>Grubb's Test</p>
     <p>p : <input type="text" ng-model="probability"></p>
     <p>p: {{probability}}</p>
     <p>df : <input type="text" ng-model="degreeFreedom"></p>
     <p>df: {{degreeFreedom}}</p>
     <button ng-click="ctrl.tinv(probability,degreeFreedom)">Grubbs</button>
+    <hr/> -->
+    
+    <table class="dataSamplesTable">
+      <tr>
+        <td>Rounded</td>
+        <td>Normalized</td>
+      </tr>
+      <tr ng-repeat="x in ctrl.results">
+        <td>{{ x.rounded }}</td>
+        <td>{{ x.normalized }}</td>
+      </tr>
+    </table>
 
   </div>
   <!--  Scripts-->

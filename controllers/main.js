@@ -58,63 +58,35 @@
           console.log("Grubb's: " + grubbsValue);
         });
 
+
+        // identify outliers
+        outliers = GrubbsCalculator.identifyOutliers(samples, grubbsSetCalculations, significanceLevel);
+
         console.log("\n\n_____Grubbs Values____");
         console.log("grubbsValues: " + grubbsSetCalculations);
-        // identify outliers
-        var x = 0;
-        while (x < samples.length) {
-          //console.log("samples[x] length: " + samples[x].length);
-          y = 0;
-          samples[x].forEach(function(sample){
-            //console.log("sample.Value: " + sample.Value);
-            //console.log("grubbsSetCalculations[x]: " + grubbsSetCalculations[x] + " for set (x): " + x);
-           //console.log("sample index (y): " + y++);
-            if (sample.Value > grubbsSetCalculations[x] + significanceLevel || sample.Value < grubbsSetCalculations[x] - significanceLevel){
-              // only push is the current sample.timestamp DNE in outliers
-              //outliers.push(sample.Timestamp);
-              if(outliers.indexOf(sample.Timestamp) === -1) {
-                outliers.push(sample.Timestamp);
-                //console.log(outliers);
-              }
-            }
-          });
-          x++;
-        };
-
-
         console.log("\n\n______REMOVE OUTLIERS______")
         console.log("outliers: " + outliers);
-        var tempSamples = [[]];
-        var tempSet = [];
+
         // filter outliers from samples
         if (outliers.length > 0){
-          tempSamples = [[]];
-          
-          samples.forEach(function(set){
-              tempSet = [];
-              set.forEach(function(sample){
-                if (!outliers.includes(sample.Timestamp)){
-                  tempSet.push(sample);
-                }
-            });
-            tempSamples.push(tempSet);
-          });
-          samples = tempSamples;
+          samples = GrubbsCalculator.removeOutliers(samples, outliers);
         }
-  
-        //console.log("iterattive outliers: " + outliers);
-
-
       } while (outliers.length > 0);
 
+
       console.log("----- RESULTS -----");
-      console.log("outliers: " + outliers);
+      this.results = [];
+      var tempResults = [];
       samples.forEach(function(set){
         resultAverage = GrubbsCalculator.calculateAverage(set);
         resultSize = set.length;
         avg_rounded = GrubbsCalculator.calculateAverage_Rounded(resultAverage);
         avg_normalized = GrubbsCalculator.calculateAverage_Normalized(resultAverage);
-
+        var result = {
+          rounded: avg_rounded,
+          normalized: avg_normalized
+        };
+        tempResults.push(result);
         console.log("set.length: " + set.length);
         console.log("set: " + set);
         console.log("result size: " + resultSize);
@@ -123,6 +95,14 @@
         console.log("average (rounded): " + avg_rounded);
 
       });
+      this.results = tempResults;
+
+      console.log("Final Results");
+      this.results.forEach(function(result){
+        console.log("result (rounded): " + result.rounded);
+        console.log("result (normalized): " + result.normalized);
+      });
+        
 
 
 

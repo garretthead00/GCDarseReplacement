@@ -27,14 +27,13 @@ var GrubbsCalculator = {
         var sqrDiff = diff * diff;
         return sqrDiff;
       });
-      // console.log("value.lenght: " + values.length);
+      // console.log("value.length: " + values.length);
       var avgSquareDiff = (squareDiffs / samples.length);
 
       var sum = squareDiffs.reduce(function(sum, value){
         return sum + value;
       }, 0);
       var avgSquareDiff = (sum / samples.length);
-
 
       //console.log("avgSqrDiff: " + avgSquareDiff);
       var stdDev = Math.sqrt(avgSquareDiff);
@@ -49,8 +48,41 @@ var GrubbsCalculator = {
       var tInvVal = T_InverseTable.getTIntVal(probabilty,size - 2);
       return (size - 1) * tInvVal / Math.sqrt(size * (size - 2 + (tInvVal * tInvVal)));
 
-    }
+    },
 
-    
+    identifyOutliers : function(samples, values, significanceLevel) {
+      var outliers = [];
+      var x = 0;
+      while (x < samples.length) {
+        y = 0;
+        samples[x].forEach(function(sample){
+          var minThreshold = values[x] - significanceLevel;
+          var maxThreshold = values[x] + significanceLevel;
+          if (sample.Value > maxThreshold || sample.Value < minThreshold){
+            if(outliers.indexOf(sample.Timestamp) === -1) {
+              outliers.push(sample.Timestamp);
+            }
+          }
+        });
+        x++;
+      };
+      return outliers;
+    },
+
+    removeOutliers : function(samples, outliers) {
+      var tempSamples = [[]];
+      var tempSet = [];
+      tempSamples = [[]];
+      samples.forEach(function(set){
+          tempSet = [];
+          set.forEach(function(sample){
+            if (!outliers.includes(sample.Timestamp)){
+              tempSet.push(sample);
+            }
+        });
+        tempSamples.push(tempSet);
+      });        
+      return tempSamples;
+    }
 
 }
