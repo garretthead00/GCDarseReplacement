@@ -16,7 +16,7 @@
       this.tinv = function(probability,degreeFreedom){
        // var tInvTable = new T_InverseTable();
         var tInvValue = T_InverseTable.getTIntVal(probability,degreeFreedom);
-        console.log("---MAIN tInvValue: " + tInvValue);
+        //console.log("---MAIN tInvValue: " + tInvValue);
       };
 
 
@@ -37,6 +37,10 @@
           var size = GrubbsCalculator.calculateSize(set);
           var average = GrubbsCalculator.calculateAverage(set);
           var standardDeviation = GrubbsCalculator.calculateStandardDeviation(set, average);
+          var standardDeviation_Sample = GrubbsCalculator.calculateStandardDeviation_Sample(set, average);
+          var other_standardDeviation_Sample = GrubbsCalculator.otherStdDevSample(set, average);
+
+
           var t_TestSignificance = GrubbsCalculator.calculateT_TestSignificance(set, 0.05);
 
           // Find the closest value equal to the 1 - tTestSignificance
@@ -53,6 +57,8 @@
           console.log("size: " + size);
           console.log("mean: " + average);
           console.log("standard dev: " + standardDeviation);
+          console.log("standard dev sample: " + standardDeviation_Sample);
+          console.log("OTHER standard dev sample: " + other_standardDeviation_Sample);
           console.log("t_Test: " + t_TestSignificance);
           console.log("closest prob from tTestVal: " + closest);
           console.log("Grubb's: " + grubbsValue);

@@ -28,7 +28,7 @@ var GrubbsCalculator = {
         return sqrDiff;
       });
       // console.log("value.length: " + values.length);
-      var avgSquareDiff = (squareDiffs / samples.length);
+      //var avgSquareDiff = (squareDiffs / samples.length);
 
       var sum = squareDiffs.reduce(function(sum, value){
         return sum + value;
@@ -36,6 +36,37 @@ var GrubbsCalculator = {
       var avgSquareDiff = (sum / samples.length);
 
       //console.log("avgSqrDiff: " + avgSquareDiff);
+      var stdDev = Math.sqrt(avgSquareDiff);
+      return stdDev;
+    },
+
+    calculateStandardDeviation_Sample : function(samples, average){
+      var squareDiffs = samples.map(function(sample){
+        var diff = sample.Value - average;
+        var sqrDiff = diff * diff;
+        return sqrDiff;
+      });
+      // console.log("value.length: " + values.length);
+     // var avgSquareDiff = (squareDiffs / samples.length);
+
+      var sum = squareDiffs.reduce(function(sum, value){
+        return sum + value;
+      }, 0);
+      var avgSquareDiff = (sum / samples.length-1);
+
+      //console.log("avgSqrDiff: " + avgSquareDiff);
+      var stdDev = Math.sqrt(avgSquareDiff);
+      return stdDev;
+    },
+
+    otherStdDevSample : function(samples, average){
+      var sum = 0;
+      samples.forEach(function(sample){
+        var diff = sample.Value - average;
+        var sqrDiff = diff * diff;
+        sum = sum + sqrDiff
+      });
+      var avgSquareDiff = (sum / samples.length-1);
       var stdDev = Math.sqrt(avgSquareDiff);
       return stdDev;
     },
