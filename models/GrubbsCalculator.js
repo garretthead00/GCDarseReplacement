@@ -107,7 +107,7 @@ var GrubbsCalculator = {
       samples.forEach(function(set){
           tempSet = [];
           set.forEach(function(sample){
-            if (!outliers.includes(sample.Timestamp)){
+            if (outliers.indexOf(sample.Timestamp) == -1) {
               tempSet.push(sample);
             }
         });

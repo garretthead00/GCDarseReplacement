@@ -33,6 +33,7 @@
   <!-- jQuery Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
+
   <!-- AngularJS Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.js"></script>
@@ -64,7 +65,7 @@
     <md-content layout-padding ng-cloak>
       <p>End: <md-datepicker ng-model="ctrl.endDate" md-placeholder="Enter End Date"></md-datepicker> {{ ctrl.endDate }}</p>
     </md-content>
-    </md-content>
+
     <hr/>
     
     <h5>Select a Jetty</h5>
@@ -75,14 +76,6 @@
     <p>Selected Jetty: {{ ctrl.jetty }}</p>
     <hr/>
 
-    <!-- <p>Grubb's Test</p>
-    <p>p : <input type="text" ng-model="probability"></p>
-    <p>p: {{probability}}</p>
-    <p>df : <input type="text" ng-model="degreeFreedom"></p>
-    <p>df: {{degreeFreedom}}</p>
-    <button ng-click="ctrl.tinv(probability,degreeFreedom)">Grubbs</button>
-    <hr/> -->
-    
     <table class="dataSamplesTable">
       <tr>
         <td>Rounded</td>
@@ -95,6 +88,11 @@
     </table>
 
   </div>
+
+  
+  <!-- API -->
+  <script type="text/javascript" src="./API/PIWebAPI.js"></script>
+
   <!--  Scripts-->
   <script type="text/javascript" src="./models/T_InverseTable.js"></script>
   <script type="text/javascript" src="./models/SampledData.js"></script>
@@ -102,6 +100,7 @@
 
   <!-- Controllers -->
   <script type="text/javascript" src="./controllers/main.js"></script>
+
 
 </body>
 </html>
