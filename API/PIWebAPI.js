@@ -110,6 +110,12 @@ function getPlotData(id, startTime, endTime, intervals) {
     return webRequest(apiRoot + "/streams/" + id + "/plot?starttime=" + startTime + "&endtime=" + endTime + "&intervals=" + intervals.toString() + "&selectedfields=items.timestamp;items.value" + reqTS);
 }
 
+function getInterpolatedData(id, startTime, endTime, interval) {
+	var reqTS = "&requestTimestamp=" + (new Date().getTime());
+    return webRequest(apiRoot + "/streams/" + id + "/interpolated?starttime=" + startTime + "&endtime=" + endTime + "&intervals=" + interval.toString() + "&selectedfields=items.timestamp;items.value" + reqTS);
+}
+
+
 // Returns immediate children of an attribute, specified by attribute web ID
 function getChildAttributes(id) {
 	var reqTS = "?requestTimestamp=" + (new Date().getTime());

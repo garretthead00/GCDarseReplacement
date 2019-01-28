@@ -109,30 +109,27 @@
        // console.log("result (normalized): " + result.normalized);
       });
         
-      var startTime = "*-102h";
-      var endTime = "*-98h";
-      var intervals = 500;
-      var tsArray = [];
-      var valueArray = [];
-      var returnedValArray = [];
+      // var startTime = "*-102h";
+      // var endTime = "*-98h";
+      // var interval = "4m"
+      // var tsArray = [];
       
-      console.log("starting service...");
+
+      // console.log("starting service...");
       
-      getRecordedData("F1DP4fzRUyKOPUK7lpmO6iv2GgpB0AAAQVpSMDFQSTAxXFNJTlVTT0lE", startTime, endTime).then(function(d){
-        console.log("getRecordedData...");
-          console.log(d);
-          d.Items.forEach(function(i){
-            console.log(i.Value);
-           });
+      // getInterpolatedData("F1DP4fzRUyKOPUK7lpmO6iv2GgMQ4AAAQVpSMDFQSTAxXENBTV9EQ1M6QUkxMDAxQV9DNg", startTime, endTime, interval).then(function(d){
+      //   console.log("getInterpolatedData...");
+      //     console.log(d);
+      //     d.Items.forEach(function(i){
+      //       console.log("Timestamp: " + i.Timestamp + ", Value: " + i.Value);
+      //      });
           
-          d.Items.forEach(function(i){
-              returnedValArray.push({Timestamp: i.Timestamp, Value: i.Value});
-          });
-      }).then(function(){
-          console.log(returnedValArray);
-      });
-      
-      console.log("got data...");
+      //     d.Items.forEach(function(i){
+      //         tsArray.push({Timestamp: i.Timestamp, Value: i.Value});
+      //     });
+      // }).then(function(){
+      //     console.log(tsArray);
+      // });
 
 
     });
