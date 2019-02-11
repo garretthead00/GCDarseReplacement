@@ -128,29 +128,3 @@ function getFullAttributes(id) {
     var reqTS = "&requestTimestamp=" + (new Date().getTime());
     return webRequest(apiRoot + "/streamsets/" + id + "/end?searchFullHierarchy=true" + reqTS);
 }
-
-
-// var startTime = "*-102h";
-// var endTime = "*-98h";
-// var intervals = 500;
-// var tsArray = [];
-// var valueArray = [];
-// var returnedValArray = [];
-
-// console.log("starting service...");
-
-// getRecordedData("F1DP4fzRUyKOPUK7lpmO6iv2GgpB0AAAQVpSMDFQSTAxXFNJTlVTT0lE", startTime, endTime).then(function(d){
-// 	console.log("getRecordedData...");
-//     console.log(d);
-//     d.Items.forEach(function(i){
-//     	console.log(i.Value);
-//      });
-    
-//     d.Items.forEach(function(i){
-//         returnedValArray.push({Timestamp: i.Timestamp, Value: i.Value});
-//     });
-// }).then(function(){
-//     console.log(returnedValArray);
-// });
-
-// console.log("got data...");
