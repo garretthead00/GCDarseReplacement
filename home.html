@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!--
+
+  *** SUMMARY ***
+  title: GC Darse Replacement
+  description: This application takes in analyzer data samples from the PI System (Data Archive),
+  runs the data through the Grubb's Test, and then writes the calculated data back to the PI System.
+  created: 12/26/2018
+  last updated: 12/26/2018
+
+
+  *** DOCUMENTATION ***
+
+-->
+
+<head>
+  <!-- <base href="/"> -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GC Darse Replacement</title>
+
+  <!-- BootStrap Library -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/DataSampleTable.css">
+
+  <!-- jQuery Library -->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>-->
+  <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+  <!-- AngularJS Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+
+  <!-- BootstrapJS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body ng-app="GCDarseReplacementApp" ng-controller="mainCtrl as ctrl">
+  <div> 
+    <h1>GC Darse Replacement</h1>
+    <hr/>
+
+    <p>Cargo Name : <input type="text" ng-model="ctrl.cargoName"></p>
+    <p>Cargo Name: {{ctrl.cargoName}}</p>
+    <hr/>
+
+    <h5>Date Range</h5>
+    <md-content layout-padding ng-cloak>
+        <p>Start: <md-datepicker ng-model="ctrl.startDate" md-placeholder="Enter Start Date"></md-datepicker> {{ ctrl.startDate }}</p>
+    </md-content>
+    <md-content layout-padding ng-cloak>
+      <p>End: <md-datepicker ng-model="ctrl.endDate" md-placeholder="Enter End Date"></md-datepicker> {{ ctrl.endDate }}</p>
+
+    </md-content>
+    <hr/>
+    
+    <h5>Select a Jetty</h5>
+    <select ng-model="ctrl.jetty">
+      <option value="south">South</option>
+      <option value="north">North</option>
+    </select>
+    <p>Selected Jetty: {{ ctrl.jetty }}</p>
+    <hr/>
+
+    <!-- <p>Grubb's Test</p>
+    <p>p : <input type="text" ng-model="probability"></p>
+    <p>p: {{probability}}</p>
+    <p>df : <input type="text" ng-model="degreeFreedom"></p>
+    <p>df: {{degreeFreedom}}</p>
+    <button ng-click="ctrl.tinv(probability,degreeFreedom)">Grubbs</button>
+    <hr/> -->
+    
+    <table class="dataSamplesTable">
+      <tr>
+        <td>Rounded</td>
+        <td>Normalized</td>
+      </tr>
+      <tr ng-repeat="x in ctrl.results">
+        <td>{{ x.rounded }}</td>
+        <td>{{ x.normalized }}</td>
+      </tr>
+    </table>
+
+  </div>
+  <!--  Scripts-->
+  <script type="text/javascript" src="./models/T_InverseTable.js"></script>
+  <script type="text/javascript" src="./models/SampledData.js"></script>
+  <script type="text/javascript" src="./models/GrubbsCalculator.js"></script>
+
+  <!-- Controllers -->
+  <script type="text/javascript" src="./controllers/main.js"></script>
+
+  <!-- API -->
+  <script type="text/javascript" src="./API/PIWebAPI.js"></script>
+
+</body>
+</html>
